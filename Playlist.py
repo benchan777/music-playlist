@@ -9,23 +9,21 @@ class Playlist:
 
   def add_song(self, title):
     new_song = Song(title)
-    # new_song.next = self.__first_song
-    # self.__first_song = new_song
     new_song.set_next_song(self.__first_song)
     self.__first_song = new_song
 
   # TODO: Create a method called find_song that searches for whether a song exits in the playlist and returns its index. The method has one parameters, title, which is the title of the song to be searched for. If the song is found, return its index.
 
   def find_song(self, title):
-    song_counter = 0
-    song_name = self.__first_song.get_title()
+    song_counter = 1
+    current_song = self.__first_song
 
-    while song_name != title:
+    while current_song.get_title() != title:
       song_counter += 1
-      song_name = self.__first_song.get_next_song()
+      current_song = current_song.get_next_song()
 
-    if song_name == title:
-      return song_counter
+    if current_song.get_title() == title:
+      return f"{current_song.get_title()} is song #{song_counter} in the playlist."
     else:
       return f"Song not found."
 
@@ -64,4 +62,4 @@ playlist.add_song("insomnia")
 playlist.add_song("djhflaja")
 playlist.add_song("messiah")
 print(playlist.length())
-# playlist.find_song("djhflaja")
+print(playlist.find_song("djhflaja"))
