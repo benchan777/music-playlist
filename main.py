@@ -38,7 +38,7 @@ while True:
   # Option 3: To remove a song from playlist
   elif user_selection == 3:
     song_title = input('What song do you want to remove? ')
-    playlist.remove_song(song_title)
+    print(playlist.remove_song(song_title))
 
 
   # Option 4: To search for song in playlist
