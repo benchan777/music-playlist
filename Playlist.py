@@ -9,6 +9,7 @@ class Playlist:
 
   def add_song(self, title):
     new_song = Song(title)
+    new_song.set_title(title)
     new_song.set_next_song(self.__first_song)
     self.__first_song = new_song
 
@@ -22,10 +23,13 @@ class Playlist:
       song_counter += 1
       current_song = current_song.get_next_song()
 
-    if current_song.get_title() == title:
-      return song_counter
-    else:
-      return -1
+      if current_song == None:
+        return -1
+
+      if current_song.get_title() == title:
+        return song_counter
+      else:
+        return -1
 
   # TODO: Create a method called remove_song that removes a song from the playlist. This method takes one parameter, title, which is the song that should be removed. 
 
@@ -35,6 +39,7 @@ class Playlist:
 
     if current_song.get_title() == title:
       self.__first_song = self.__first_song.get_next_song()
+      return f"Deleted {current_song.get_title()} from the playlist."
 
     while current_song.get_title() != title:
       previous_song = current_song
@@ -43,10 +48,10 @@ class Playlist:
       if current_song == None:
         return f"Song not found."
 
-    if current_song.get_title() == title:
-      next_song = current_song.get_next_song()
-      previous_song.set_next_song(next_song)
-      return f"Deleted {current_song.get_title()} from the playlist."
+      if current_song.get_title() == title:
+        next_song = current_song.get_next_song()
+        previous_song.set_next_song(next_song)
+        return f"Deleted {current_song.get_title()} from the playlist."
 
   # TODO: Create a method called length, which returns the number of songs in the playlist.
 
@@ -70,6 +75,10 @@ class Playlist:
   def print_songs(self):
     song_counter = 1
     current_song = self.__first_song
+
+    if current_song == None:
+      print(f"No songs found in the playlist.")
+      return None
 
     while current_song.get_title() != None:
       print(f"{song_counter}. {current_song.get_title()}")
