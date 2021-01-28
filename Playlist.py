@@ -26,10 +26,8 @@ class Playlist:
       if current_song == None:
         return -1
 
-      if current_song.get_title() == title:
-        return song_counter
-      else:
-        return -1
+    if current_song.get_title() == title:
+      return song_counter
 
   # TODO: Create a method called remove_song that removes a song from the playlist. This method takes one parameter, title, which is the song that should be removed. 
 
